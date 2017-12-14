@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Facebook API</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>  <!--angular load-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-animate.min.js"></script> <!-- angular animate load -->
+        <script src="js/controllers.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  <!-- bootstrap css load -->
+        
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    
+    <body>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '290482974718709',
+              xfbml      : true,
+              version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
+        
+        <div ng-controller="MyController">
+            
+            <div class="container-fluid">
+                <nav class="navbar navbar-default">
+                    <section class="row">
+                        <section class="col-xs-12 col-sm-3">
+                            <div class="navbar-header">
+                                <a href="" class="navbar-brand">FB Search</a>
+                            </div>
+                        </section>
+
+                        <section class="container-fluid">
+                            <section class="col-xs-12 col-sm-7">
+                               <form class="navbar-form" role="search">
+                                   <section class="row">
+                                       <section class="form-group">
+                                           <section class="col-xs-9 col-sm-10">
+                                               <div class="input-group">
+                                                        <input name="search" id="searchbox" type="search" class="form-control" placeholder="type something..."
+                                                                data-toggle="tooltip" data-placement="bottom" title="Please type a keyword" ng-focus = "removett()">
+                                                        <span class="input-group-btn">
+                                                            <button id="search" class="btn btn-primary" ng-click="firstpage()"><span class="glyphicon glyphicon-search"></span></button>
+                                                        </span>
+                                               </div>
+                                            </section>
+                                            <section class="col-xs-3 col-sm-2">
+                                                <button id="clear" class="btn btn-default" ng-click="clear()">Clear</button>
+                                            </section>
+                                        </section>
+                                    </section>
+                               </form>
+                            </section>
+                        </section>
+                    </section>
+                </nav>
+            
+
+                    
+                    <div class="clearable container-fluid">
+                        <div id="itempage" class="table-responsive animate-right-left" ng-hide="myValue2">
+                            <div class="container-fluid">
+                                <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar">
+                                        <span class="sr-only">60% Complete</span>
+                                    </div>
+                                </div>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th ng-class="makevisible();">#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Details</th>
+                                    </thead>
+
+                                    <tr ng-repeat="item in data">
+                                        <td> <b>{{$index+1}} </b></td>
+                                        <td> {{item.name}} </td>
+                                        <td> <input id="umail" type="email"/></td>
+                                        <td> <input id="uphone" type="text"/></td>
+                                        <td> <button class="btn btn-default" width='20' height='20' ng-click="update(item)">
+                                                 <span class="glyphicon glyphicon-chevron-right"></span> 
+                                             </button> 
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                         </div>
+                        
+                     </div>
+                </div> 
+         </div>
+        
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- jquery load -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> <!-- bootstrap js load -->
+        <noscript/>
+    </body>
+</html>
